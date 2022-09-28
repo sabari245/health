@@ -1,8 +1,17 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+// import * as tflite from '@tensorflow/tfjs-tflite';
+const tflite = dynamic(() => import("@tensorflow/tfjs-tflite"), { ssr: false });
+
 
 function OralCancer() {
 
     const fileInputRef = useRef(null);
+
+    useEffect(async () => {
+        const tfliteModel = await tflite.loadTFLiteModel('/oralCancer.tflite');
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +28,7 @@ function OralCancer() {
 
         formData.append('image', file);
 
-        fetch('http://localhost:5000/predict', {
+        fetch('/api/predict', {
             method: 'POST',
             body: formData
         })
@@ -34,7 +43,7 @@ function OralCancer() {
     }
 
     return (
-        <div className="mx-10 my-14 rounded-lg shadow-md bg-white dark:bg-gray-800">
+        <div className="mx-10 my-14 rounded-lg shadow-md bg-white">
             <input type="file" name="image" ref={fileInputRef} />
             <button onClick={handleSubmit}>Submit</button>
         </div>
