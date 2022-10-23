@@ -2,6 +2,22 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../../utils/navbar";
 import ProjectScaffold from "../../utils/projectScaffold";
+import { OralCancerContent, OrlaCancerContentStyle } from "./oralCancerContent";
+
+const CONTENTS = [
+    {
+        title: "Introduction",
+        link: "introduction"
+    },
+    {
+        title: "The Problem",
+        link: "problem"
+    },
+    {
+        title: "The Solution",
+        link: "solution"
+    }
+]
 
 function FileUploadSvg() {
     return (
@@ -38,8 +54,6 @@ export default function OralCancerPage() {
         });
     }, [dragdropRef]);
 
-
-
     const fileUploadHandle = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -55,10 +69,16 @@ export default function OralCancerPage() {
                 <title>Oral Cancer Detector</title>
                 <meta name="description" content="Check oral cancer with the help of AI" />
                 <link rel="icon" href="/favicon.ico" />
+                <style
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            '\np.MsoNormal, li.MsoNormal, div.MsoNormal\n{margin-top:0in;\nmargin-right:0in;\nmargin-bottom:8.0pt;\nmargin-left:0in;\nline-height:107%;\nfont-size:11.0pt;}\np.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph\n{margin-top:0in;\nmargin-right:0in;\nmargin-bottom:8.0pt;\nmargin-left:.5in;\nline-height:107%;\nfont-size:11.0pt;}\np.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst\n{margin-top:0in;\nmargin-right:0in;\nmargin-bottom:0in;\nmargin-left:.5in;\nline-height:107%;\nfont-size:11.0pt;}\np.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle\n{margin-top:0in;\nmargin-right:0in;\nmargin-bottom:0in;\nmargin-left:.5in;\nline-height:107%;\nfont-size:11.0pt;}\np.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast\n{margin-top:0in;\nmargin-right:0in;\nmargin-bottom:8.0pt;\nmargin-left:.5in;\nline-height:107%;\nfont-size:11.0pt;}\n.MsoPapDefault\n{margin-bottom:8.0pt;\nline-height:107%;}\n@page WordSection1\n{size:595.3pt 841.9pt;\nmargin:1.0in 1.0in 1.0in 1.0in;}\ndiv.WordSection1\n{page:WordSection1;}\n ol\n{margin-bottom:0in;}\nul\n{margin-bottom:0in;}\n-->\n'
+                    }}
+                />
             </Head>
-            <ProjectScaffold>
+            <ProjectScaffold contents={CONTENTS}>
                 <h1 className="ml-16 mt-8">Please Upload your files here</h1>
-                <div className="flex justify-center items-center mx-16 mt-4">
+                <div className="flex justify-center itsems-center mx-16 mt-4">
                     <label ref={dragdropRef} htmlFor="dropzone-file" className={"flex flex-col justify-center items-center w-full h-64 rounded-lg cursor-pointer bg-gray-100" + (imageUrl ? " bg-transparent" : " border-2 border-gray-300 border-dashed hover:bg-gray-200")}>
                         <div className="flex flex-col justify-center items-center pt-5 pb-6">
                             {
@@ -69,8 +89,7 @@ export default function OralCancerPage() {
                     </label>
                 </div>
                 {/* render some random divs for scrolling test*/}
-                <div className="h-96"></div>
-                <div className="h-96"></div>
+                <OralCancerContent />
             </ProjectScaffold>
         </>
     )
