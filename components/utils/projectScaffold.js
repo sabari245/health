@@ -13,8 +13,8 @@ function ListItem(props) {
 
 function ListOfContent(props) {
     return (
-        <aside class="w-64" aria-label="Sidebar">
-            <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800" style={{ height: "calc( 100vh - 4.25rem )" }}>
+        <aside class="w-72" aria-label="Sidebar">
+            <div class="overflow-y-auto w-72 py-4 px-3 bg-gray-50 rounded dark:bg-gray-800" style={{ height: "calc( 100vh - 4.25rem )" }}>
                 <ul class="space-y-2">
                     {props.contents?.map((content, index) => {
                         return (
